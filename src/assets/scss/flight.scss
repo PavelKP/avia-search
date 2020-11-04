@@ -1,0 +1,5 @@
+.flight__header {
+  @include size(640px, 43px);
+
+  background-color: $blue;
+}

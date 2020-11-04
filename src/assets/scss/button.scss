@@ -1,0 +1,54 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+
+  text-align: center;
+
+  background-color: transparent;
+  border: 0;
+
+  &--text {
+    min-height: 24px;
+    max-width: 150px;
+
+    //font-family: $lab-grotesque-medium;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 500;
+
+    //color: $crimson;
+
+    &:hover {
+     // color: $orange;
+    }
+
+    &:active {
+    //  color: $crimson;
+    }
+  }
+
+  &--small {
+    @include size(288px, 40px);
+    font-size: 12px;
+    line-height: 16px;
+    color: $white;
+
+   // background: $crimson-gradient;
+   // background-color: $crimson;
+
+    border-radius: 6px;
+   // box-shadow: $red-shadow;
+
+    &:hover {
+    //  background: $red-intense;
+    }
+
+    &:disabled {
+      box-shadow: none;
+   //   background: $grey-light;
+    }
+  }
+}

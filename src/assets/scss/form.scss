@@ -1,0 +1,97 @@
+.form {
+  position: fixed;
+  width: 255px;
+  max-height: 800px;
+
+  padding: 34px 11px 36px 21px;
+
+  background-color: $white;
+
+  overflow-y: auto;
+}
+
+.form__heading {
+  margin-bottom: 17px;
+
+  font-family: $open-sans-bold;
+  font-size: 13px;
+}
+
+.form__set {
+  margin-bottom: 40px;
+}
+
+.form__label {
+  position: relative;
+  display: flex;
+
+  margin-bottom: 1px;
+
+  letter-spacing: 0.6px;
+
+  &:hover .form__input--radio {
+    border-color: $blue-deep;
+  }
+}
+
+.form__input {
+  display: block;
+  border: 1px solid $grey-dark;
+
+  &::placeholder {
+    color: blue;
+  }
+
+  &:focus {
+    color: $black;
+    border-color: blue;
+  }
+
+  &:disabled {
+    border-color: blue;
+    background-color: transparent;
+
+    &::placeholder {
+      color: $grey;
+    }
+  }
+
+  &--box {
+    position: relative;
+
+    @include size(20px);
+    margin: 0;
+    margin-right: 11px;
+    padding: 0;
+
+    border-radius: 6px;
+  }
+
+  &--radio {
+    @include size(13px);
+    margin-right: 6px;
+    padding: 0;
+
+    border-radius: 100%;
+  }
+}
+
+.form__input-hidden {
+  &:checked + .form__input--radio {
+    border-color: $blue-deep;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+
+      display: block;
+
+      @include size(7px);
+
+      background-color: $blue-deep;
+      border-radius: 100%;
+    }
+  }
+}

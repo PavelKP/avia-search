@@ -105,7 +105,7 @@ const Main = () => {
             <p>
               Рейс выполняет <span>Lot Polish Airlines</span>
             </p>
-            <button type="button">Выбрать</button>
+            <button type="button" className="button button--choose">Выбрать</button>
           </li>
           <li className="flight__item">
             <div className="flight__header">

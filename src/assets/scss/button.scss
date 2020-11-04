@@ -3,30 +3,29 @@
   align-items: center;
   justify-content: center;
   margin: 0;
-  padding: 0;
+  padding: 5px 10px;
 
   text-align: center;
 
   background-color: transparent;
   border: 0;
 
-  &--text {
-    min-height: 24px;
-    max-width: 150px;
+  &--choose {
+    @include size(640px, 40px);
 
-    //font-family: $lab-grotesque-medium;
-    font-size: 14px;
+    font-family: $open-sans-bold;
+    font-size: 16px;
     line-height: 24px;
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: -0.4px;
+    color: $white;
 
-    //color: $crimson;
-
-    &:hover {
-     // color: $orange;
-    }
+    background-color: $orange;
 
     &:active {
-    //  color: $crimson;
+      padding-left: 12px;
+      padding-top: 7px;
     }
   }
 

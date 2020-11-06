@@ -35,19 +35,19 @@
     line-height: 16px;
     color: $white;
 
-   // background: $crimson-gradient;
-   // background-color: $crimson;
+    // background: $crimson-gradient;
+    // background-color: $crimson;
 
     border-radius: 6px;
-   // box-shadow: $red-shadow;
+    // box-shadow: $red-shadow;
 
     &:hover {
-    //  background: $red-intense;
+      //  background: $red-intense;
     }
 
     &:disabled {
       box-shadow: none;
-   //   background: $grey-light;
+      //   background: $grey-light;
     }
   }
 }

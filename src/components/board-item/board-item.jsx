@@ -4,9 +4,13 @@ const BoardItem = () => {
   return (
     <li className="flight__item">
       <div className="flight__header">
-        <img src="" height="20"></img>
-        <p>21049<span>&#8381;</span></p>
-        <span>Стоимость для одного взрослого пассажира</span>
+        <img src="data:image/png;base64, " height="20"/>
+        <div className="flight__price-wrapper">
+          <p className="flight__price-value">
+            21049 <span>&#8381;</span>
+          </p>
+          <span className="flight__price-text">Стоимость для одного взрослого пассажира</span>
+        </div>
       </div>
       <div className="flight__direction">
         <p>

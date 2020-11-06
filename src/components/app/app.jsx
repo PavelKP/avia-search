@@ -1,7 +1,7 @@
 import React from 'react';
 import Main from '../main/main';
 import Loading from '../loading/loading';
-
+/*
 const url = `https://pavelkp.github.io/json/flights.json`;
 
 const getFlights = () => {
@@ -10,22 +10,22 @@ const getFlights = () => {
     return response.json();
   })
 }
-
+*/
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isLoading: true
+      isLoading: false
     }
 
     this._flights = null;
   }
 
   componentDidMount() {
-    getFlights()
+   /* getFlights()
       .then((flights) => this._flights = flights)
-      .then(()=> this.setState((state) => ({isLoading: !state.isLoading})));
+      .then(()=> this.setState((state) => ({isLoading: !state.isLoading})));*/
   }
 
   render() {

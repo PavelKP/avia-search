@@ -1,5 +1,13 @@
+.flight {
+  margin-bottom: 13px;
+}
+
 .flight__item {
   min-height: 370px;
+
+  &:not(:last-of-type) {
+    margin-bottom: 27px;
+  }
 }
 
 .flight__header {

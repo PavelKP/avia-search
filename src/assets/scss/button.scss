@@ -28,25 +28,15 @@
     }
   }
 
-  &--small {
-    @include size(288px, 40px);
-    font-size: 12px;
-    line-height: 16px;
-    color: $white;
+  &--more {
+    @include size(255px, 31px);
+    margin: 0 auto;
+    padding: 4px 10px 4px 13px;
+    font-size: 19px;
+    color: $black-light;
 
-    // background: $crimson-gradient;
-    // background-color: $crimson;
-
-    border-radius: 6px;
-    // box-shadow: $red-shadow;
-
-    &:hover {
-      //  background: $red-intense;
-    }
-
-    &:disabled {
-      box-shadow: none;
-      //   background: $grey-light;
-    }
+    background-color: $pepper;
+    border: 1px solid $grey-graphite;
+    box-shadow: inset 1px 1px $grey-steel, inset -1px -1px $grey-steel;
   }
 }

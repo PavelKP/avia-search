@@ -18,7 +18,7 @@ const BoardItem = ({flight}) => {
           <span className="flight__price-text">Стоимость для одного взрослого пассажира</span>
         </div>
       </div>
-      {legs.map((leg, i)=> <Leg key={i} leg={leg}/>)}
+      {legs.map((leg, i)=> <Leg key={i} leg={leg} i={i} />)}
       <button type="button" className="button button--choose">Выбрать</button>
     </li>
   );

@@ -3,13 +3,12 @@ import BoardItem from '../board-item/board-item';
 import {connect} from 'react-redux';
 
 const Board = ({flights}) => {
-  let test = [flights[141]];
   return (
     <section className="board">
       <ul className="flight list-reset">
-        {test.map((flight, i)=> <BoardItem key={i} flight={flight}/>)}
+        {flights.slice(0, 2).map((flight, i)=> <BoardItem key={i} flight={flight}/>)}
       </ul>
-      <button type="button">Показать ещё</button>
+      <button className="button button--more" type="button">Показать еще</button>
     </section>
   );
 }

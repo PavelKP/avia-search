@@ -13,19 +13,10 @@
   align-items: center;
   min-height: 42px;
   margin: 0;
-  padding: 5px 18px;
+  padding: 3px 18px;
 
   &--direction {
-    &::after {
-      content: "";
-      position: absolute;
-      top: 41px;
-      left: 8px;
-      display: block;
-
-      @include size(621px, 1px);
-      background-color: $grey-thin;
-    }
+    line-height: 22px;
   }
 
   &--time {
@@ -33,6 +24,17 @@
     min-height: 40px;
     padding-top: 7px;
     padding-right: 38px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 8px;
+      display: block;
+
+      @include size(621px, 1px);
+      background-color: $grey-thin;
+    }
   }
 
   &--transfer {
@@ -100,6 +102,7 @@
 .leg__arrow {
   margin: 0;
   padding: 0 8px;
+  align-self: center;
 
   font-size: 14px;
   color: $blue;

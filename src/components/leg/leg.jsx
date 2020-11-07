@@ -7,39 +7,43 @@ const Leg = ({leg}) => {
   const transferCount = leg.segments.length -1;
 
   return (
-    <article>
-      <div className="flight__direction">
-        <p className="flight__airport">
+    <article className="leg">
+      <div className="leg__line leg__line--direction">
+        <p className="leg__main-text">
           <span>{from.departureCity.caption}, </span>
           <span>{from.departureAirport.caption} </span>
-          <span className="flight__short-name">({from.departureAirport.uid})</span>
+          <span className="leg__sub-text">({from.departureAirport.uid})</span>
         </p>
-        <p className="flight__arrow">
+        <p className="leg__arrow">
           &#10230;
           </p>
-        <p className="flight__airport">
+        <p className="leg__main-text">
           <span>{to.arrivalCity.caption}, </span>
           <span>{to.arrivalAirport.caption} </span>
-          <span className="flight__short-name">({to.arrivalAirport.uid})</span>
+          <span className="leg__sub-text">({to.arrivalAirport.uid})</span>
         </p>
       </div>
-      <div className="flight__time">
-        <p className="flight__departure">
+      <div className="leg__line leg__line--time">
+        <p className="leg__main-text leg__main-text--time">
           <span>{formatDate(new Date(from.departureDate), `HH:mm`)} </span>
-          <span>{formatDate(new Date(from.departureDate), `	MMM dd`)}</span>
+          <span className="leg__sub-text leg__sub-text--low">
+            {formatDate(new Date(from.departureDate), ` DD MMM dd`)}
+          </span>
+        </p >
+        <p className="leg__main-text leg__main-text--clock">
+          <div className="leg__clock"></div>
+          <span className="leg__duration">{formatDuration(leg.duration)}</span>
         </p>
-        <p className="flight__duration">
-          <img />
-          <span>{formatDuration(leg.duration)}</span>
-        </p>
-        <p className="flight__arrival">
-          <span>{formatDate(new Date(to.arrivalDate), `	MMM dd`)} </span>
+        <p className="leg__main-text leg__main-text--time">
+          <span className="leg__sub-text leg__sub-text--low">{formatDate(new Date(to.arrivalDate), ` DD MMM dd`)} </span>
           <span>{formatDate(new Date(to.arrivalDate), `HH:mm`)} </span>
         </p>
       </div>
-        {transferCount ? <p>{transferCount} пересадка</p> : ''}
-      <p>
-        Рейс выполняет: <span>{from.airline.caption}</span>
+      <div className="leg__line leg__line--transfer">
+        {transferCount ? <p className="leg__counter">{transferCount} пересадка</p> : ''}
+      </div>
+      <p className="leg__line leg__line--airline">
+        Рейс выполняет:&nbsp;<span>{from.airline.caption}</span>
       </p>
     </article>
   );

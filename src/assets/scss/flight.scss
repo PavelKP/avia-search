@@ -1,3 +1,8 @@
+.flight__item {
+  min-height: 370px;
+  font-family: $open-sans-semi-bold;
+}
+
 .flight__header {
   display: flex;
   justify-content: space-between;
@@ -13,7 +18,6 @@
   flex-direction: column;
   align-items: flex-end;
 
-  font-family: $open-sans-regular;
   color: $white;
 }
 
@@ -28,4 +32,30 @@
   font-size: 10px;
   word-spacing: 2px;
   padding-top: 1px;
+}
+
+.flight__direction {
+  display: flex;
+  align-items: center;
+  padding: 5px 18px;
+}
+
+.flight__airport {
+  margin: 0;
+  margin-bottom: 7px;
+
+  font-size: 18px;
+}
+
+.flight__short-name {
+  color: $blue;
+}
+
+.flight__arrow {
+  margin: 0;
+  padding: 0 8px;
+  padding-bottom: 5px;
+
+  font-size: 14px;
+  color: $blue;
 }

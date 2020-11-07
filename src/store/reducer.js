@@ -9,7 +9,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_FLIGHTS:
       return extend(state, {
-        flights: action.payload,
+        flights: action.payload.result.flights,
       });
     default:
       return state;

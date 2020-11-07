@@ -1,45 +1,24 @@
 import React from 'react';
+import Leg from '../leg/leg';
 
-const BoardItem = () => {
+const BoardItem = ({flight}) => {
+  const price = flight.flight.price.total.amount;
+  const carrier = flight.flight.carrier.caption;
+  const legs = flight.flight.legs;
+
+
   return (
     <li className="flight__item">
       <div className="flight__header">
-        <img src="data:image/png;base64, " height="20"/>
+        <img src="" alt={carrier} height="20"/>
         <div className="flight__price-wrapper">
           <p className="flight__price-value">
-            21049 <span>&#8381;</span>
+          {price} <span>&#8381;</span>
           </p>
           <span className="flight__price-text">Стоимость для одного взрослого пассажира</span>
         </div>
       </div>
-      <div className="flight__direction">
-        <p>
-          Москва, ШЕРЕМЕТЬЕВО
-            <span>(SVO)</span>
-        </p>
-          &#10230;
-          <p>
-          Москва, ШЕРЕМЕТЬЕВО
-            <span>(SVO)</span>
-        </p>
-      </div>
-      <div className="flight__time">
-        <p className="flight__departure">
-          <span>20:40</span>
-          <span>18 авг. вт</span>
-        </p>
-        <p className="flight__time">
-          <span>14 ч 45 мин</span>
-          <span>1 пересадка</span>
-        </p>
-        <p className="flight__arrival">
-          <span>20:40</span>
-          <span>18 авг. вт</span>
-        </p>
-      </div>
-      <p>
-        Рейс выполняет <span>Lot Polish Airlines</span>
-      </p>
+      {legs.map((leg, i)=> <Leg key={i} leg={leg}/>)}
       <button type="button" className="button button--choose">Выбрать</button>
     </li>
   );

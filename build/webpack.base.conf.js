@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 const Path = {
   SRC: path.join(__dirname, '../src'),
@@ -110,6 +111,9 @@ module.exports = {
       template: `${Path.SRC}/index.html`,
       filename: './index.html'
     }),
+    new MomentLocalesPlugin({
+      localesToKeep: ['es-us', 'ru'],
+  })
   ],
   resolve: {
     extensions: ['.js', '.jsx']

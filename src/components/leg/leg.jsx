@@ -1,5 +1,5 @@
-
 import React from 'react';
+import {formatDuration, formatDate} from '../../utils';
 
 const Leg = ({leg}) => {
   const from = leg.segments[0];
@@ -24,16 +24,16 @@ const Leg = ({leg}) => {
       </div>
       <div className="flight__time">
         <p className="flight__departure">
-          <span>{from.departureDate}</span>
-          <span>{from.departureDate}</span>
+          <span>{formatDate(new Date(from.departureDate), `HH:mm`)} </span>
+          <span>{formatDate(new Date(from.departureDate), `	MMM dd`)}</span>
         </p>
         <p className="flight__duration">
           <img />
-          <span>{leg.duration}</span>
+          <span>{formatDuration(leg.duration)}</span>
         </p>
         <p className="flight__arrival">
-          <span>{to.arrivalDate}</span>
-          <span>{to.arrivalDate}</span>
+          <span>{formatDate(new Date(to.arrivalDate), `	MMM dd`)} </span>
+          <span>{formatDate(new Date(to.arrivalDate), `HH:mm`)} </span>
         </p>
       </div>
       <p>

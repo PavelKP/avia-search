@@ -1,5 +1,5 @@
 import moment from 'moment';
-moment.lang('ru');
+moment.locale('ru');
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);

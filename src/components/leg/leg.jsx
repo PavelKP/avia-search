@@ -4,6 +4,7 @@ import {formatDuration, formatDate} from '../../utils';
 const Leg = ({leg}) => {
   const from = leg.segments[0];
   const to = leg.segments[leg.segments.length-1];
+  const transferCount = leg.segments.length -1;
 
   return (
     <article>
@@ -36,8 +37,9 @@ const Leg = ({leg}) => {
           <span>{formatDate(new Date(to.arrivalDate), `HH:mm`)} </span>
         </p>
       </div>
+        {transferCount ? <p>{transferCount} пересадка</p> : ''}
       <p>
-        Рейс выполняет <span>Lot Polish Airlines</span>
+        Рейс выполняет: <span>{from.airline.caption}</span>
       </p>
     </article>
   );

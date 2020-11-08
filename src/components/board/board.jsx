@@ -26,16 +26,25 @@ const sortingToFilter = {
   }),
 }
 
+/*
 const transferToFilter = {
   [false]: (offers) => offers,
   [true]: (offers, transfers) => offers.filter((offer) => countTransfers(offer.flight.legs) === transfers),
-}
+}*/
 
 const selectData = (offers, selection) => {
   let filtered = offers.slice();
   filtered = sortingToFilter[selection.sorting](filtered);
-  filtered = transferToFilter[selection.transferOne](filtered, 1);
-  filtered = transferToFilter[selection.transferZero](filtered, 0);
+
+  if (selection.transferOne && selection.transferZero){
+    filtered = filtered.filter((offer) => countTransfers(offer.flight.legs) === 0 || countTransfers(offer.flight.legs) === 1);
+  }
+  else if (selection.transferOne) {
+    filtered = filtered.filter((offer) => countTransfers(offer.flight.legs) === 1);
+  }
+  else if (selection.transferZero) {
+    filtered = filtered.filter((offer) => countTransfers(offer.flight.legs) === 0);
+  }
 
   return filtered;
 }

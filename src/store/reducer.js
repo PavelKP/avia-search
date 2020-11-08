@@ -40,7 +40,7 @@ const sortingToFilter = {
 }
 
 const selectData = (offers, selection) => {
-  let filtered = offers.slice();
+  let filtered = offers.slice(0, selection.cards);
   filtered = sortingToFilter[selection.sorting](filtered);
 
   if (selection.transferOne && selection.transferZero){
@@ -56,13 +56,13 @@ const selectData = (offers, selection) => {
   filtered = filtered.filter((offer) => {
     return +offer.flight.price.total.amount >= +selection.priceFrom && +offer.flight.price.total.amount <= +selection.priceTo;
   })
-  /*
+
   if (selection.activeCompanies.length !== 0) {
     filtered = filtered.filter((flight) => {
-      return selection.activeCompanies.findIndex(flight.flight.carrier.caption) !== -1;
+      return selection.activeCompanies.indexOf(flight.flight.carrier.caption) !== -1;
     });
   }
-*/
+
   return filtered;
 }
 
@@ -86,13 +86,14 @@ const reducer = (state = initialState, action) => {
     priceFrom: state.priceFrom,
     priceTo: state.priceTo,
     activeCompanies: state.activeCompanies,
+    cards: state.cards,
   }
 
   switch (action.type) {
     case ActionType.LOAD_FLIGHTS:
       return extend(state, {
         flights: action.payload.result.flights,
-        filtered: selectData(action.payload.result.flights, selection)
+        filtered: sortingToFilter[initialState.sorting](action.payload.result.flights)
       });
     case ActionType.SET_SORTING:
       return extend(state, {
@@ -103,7 +104,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         activeCompanies: refreshCompanies(state.activeCompanies, action.payload),
         filtered: selectData(state.flights, extend(selection,
-          {activeCompanies: refreshCompanies(selection, action.payload)}))
+          {activeCompanies: refreshCompanies(selection.activeCompanies, action.payload)}))
       });
     case ActionType.CHANGE_TRANSFER_ONE:
       return extend(state, {
@@ -132,6 +133,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_CARDS_AMOUNT:
       return extend(state, {
         cards: state.cards + action.payload,
+        filtered: selectData(state.flights, extend(selection, {cards: state.cards + action.payload}))
       });
     default:
       return state;

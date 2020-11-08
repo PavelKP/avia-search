@@ -53,7 +53,13 @@ const selectData = (offers, selection) => {
   filtered = filtered.filter((offer) => {
     return +offer.flight.price.total.amount >= +selection.priceFrom && +offer.flight.price.total.amount <= +selection.priceTo;
   })
-
+/*
+  if (selection.activeCompanies.length !== 0) {
+    filtered = filtered.filter((flight) => {
+      return selection.activeCompanies.find(flight.flight.carrier.caption);
+    });
+  }
+*/
   return filtered;
 }
 
@@ -93,7 +99,8 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_COMPANY:
       return extend(state, {
         activeCompanies: refreshCompanies(state.activeCompanies, action.payload),
-        filtered: selectData(state.flights, extend(selection, {activeCompanies: action.payload}))
+        filtered: selectData(state.flights, extend(selection,
+          {activeCompanies: refreshCompanies(state.activeCompanies, action.payload)}))
       });
     case ActionType.CHANGE_TRANSFER_ONE:
       return extend(state, {

@@ -26,13 +26,25 @@ class Menu extends React.Component {
   constructor(props) {
     super(props)
 
-    this._companiesCheckboxes = getCompaniesMap(this.props.filtered);
-
     this._handleSortingChange = this._handleSortingChange.bind(this);
     this._handleTransferOneChange = this._handleTransferOneChange.bind(this);
     this._handleTransferZeroChange = this._handleTransferZeroChange.bind(this);
     this._handlePriceFromChange = this._handlePriceFromChange.bind(this);
     this._handlePriceToChange = this._handlePriceToChange.bind(this);
+
+    this.state = {
+      companiesCheckboxes: [],
+    }
+  }
+
+  componentDidMount() {
+    this.setState({companiesCheckboxes: getCompaniesMap(this.props.filtered)})
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.filtered !== this.props.filtered) {
+      this.setState({companiesCheckboxes: getCompaniesMap(this.props.filtered)})
+    }
   }
 
   _handleFromChange(evt) {
@@ -115,7 +127,7 @@ class Menu extends React.Component {
           </fieldset>
           <fieldset className="form__set fieldset-reset">
             <legend className="form__heading">Авиакомпания</legend>
-            {this._companiesCheckboxes.map(([company, lowestPrice], i) => {
+            {this.state.companiesCheckboxes.map(([company, lowestPrice], i) => {
               return <CompanyItem company={company} price={lowestPrice} key={i}/>
             })}
           </fieldset>

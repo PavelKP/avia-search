@@ -2,6 +2,8 @@ export const ActionType = {
   LOAD_FLIGHTS: `LOAD_FLIGHTS`,
   SET_SORTING: `SET_SORTING`,
   SET_COMPANY: `SET_COMPANY`,
+  CHANGE_TRANSFER_ONE: `CHANGE_TRANSFER_ONE`,
+  CHANGE_TRANSFER_ZERO: `CHANGE_TRANSFER_ZERO`,
 };
 
 export const ActionCreator = {
@@ -23,4 +25,14 @@ export const ActionCreator = {
       payload: companyName,
     };
   },
+  changeTransferOne() {
+    return {
+      type: ActionType.CHANGE_TRANSFER_ONE,
+    };
+  },
+  changeTransferZero() {
+    return {
+      type: ActionType.CHANGE_TRANSFER_ZERO,
+    };
+  }
 };

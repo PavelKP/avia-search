@@ -27,12 +27,14 @@ class Menu extends React.Component {
     super(props)
 
     this._companiesCheckboxes = getCompaniesMap(this.props.flights);
-    //this._formCompanyRef = React.createRef();
 
     this._handleFromChange = this._handleFromChange.bind(this);
     this._handleSortingChange = this._handleSortingChange.bind(this);
-    this._handleTransferChange = this._handleTransferChange.bind(this);
-    this._handleCompanyChange = this._handleCompanyChange.bind(this);
+    this._handleTransferOneChange = this._handleTransferOneChange.bind(this);
+    this._handleTransferZeroChange = this._handleTransferZeroChange.bind(this);
+
+    //this._transferRef = React.createRef();
+
   }
 
   _handleFromChange(evt) {
@@ -49,15 +51,12 @@ class Menu extends React.Component {
     this.props.setSorting(evt.target.value);
   }
 
-  _handleTransferChange(evt) {
-    console.log(evt.target.checked)
+  _handleTransferOneChange() {
+    this.props.changeTransferOne();
   }
 
-  _handleCompanyChange(evt) {
-    evt.preventDefault();
-    this.props.setCompany(evt.target.name);
-    //console.log(evt.target.name);
-    //console.log(this.props.activeCompanies);
+  _handleTransferZeroChange() {
+    this.props.changeTransferZero();
   }
 
   render() {
@@ -82,15 +81,15 @@ class Menu extends React.Component {
               <span className="form__description">- по времени в пути</span>
             </label>
           </fieldset>
-          <fieldset className="form__set form__set--filter fieldset-reset" onChange={this._handleTransferChange}>
+          <fieldset className="form__set form__set--filter fieldset-reset">
             <legend className="form__heading">Фильтровать</legend>
             <label className="form__label">
-              <input className="visually-hidden form__input-hidden" type="checkbox" name="transferOne" value={true}/>
+              <input className="visually-hidden form__input-hidden" type="checkbox" name="transferOne" onChange={this._handleTransferOneChange}/>
               <span className="form__input form__input--box"></span>
               <span className="form__description">- 1 пересадка</span>
             </label>
             <label className="form__label">
-              <input className="visually-hidden form__input-hidden" type="checkbox" name="transferZero" value={true}/>
+              <input className="visually-hidden form__input-hidden" type="checkbox" name="transferZero" onChange={this._handleTransferZeroChange}/>
               <span className="form__input form__input--box"></span>
               <span className="form__description">- без пересадок</span>
             </label>
@@ -126,15 +125,17 @@ const mapStateToProps = (state) => ({
   transferZero: state.transferZero,
   priceFrom: state.priceFrom,
   priceTo: state.priceTo,
-  //activeCompanies: state.activeCompanies,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setSorting(sortingType) {
     dispatch(ActionCreator.setSorting(sortingType));
   },
-  setCompany(company) {
-    dispatch(ActionCreator.setCompany(company));
+  changeTransferOne() {
+    dispatch(ActionCreator.changeTransferOne());
+  },
+  changeTransferZero() {
+    dispatch(ActionCreator.changeTransferZero());
   }
 });
 

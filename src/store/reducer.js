@@ -42,6 +42,14 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         activeCompanies: refreshCompanies(state.activeCompanies, action.payload),
       });
+    case ActionType.CHANGE_TRANSFER_ONE:
+      return extend(state, {
+        transferOne: !state.transferOne,
+      });
+    case ActionType.CHANGE_TRANSFER_ZERO:
+      return extend(state, {
+        transferZero: !state.transferZero,
+      });
     default:
       return state;
   }

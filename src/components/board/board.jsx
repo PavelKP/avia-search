@@ -33,9 +33,9 @@ const transferToFilter = {
 
 const selectData = (offers, selection) => {
   let filtered = offers.slice();
-  filtered = sortingToFilter[selection.sorting](offers);
-  filtered = transferToFilter[selection.transferOne](offers, 1);
-  filtered = transferToFilter[selection.transferZero](offers, 0);
+  filtered = sortingToFilter[selection.sorting](filtered);
+  filtered = transferToFilter[selection.transferOne](filtered, 1);
+  filtered = transferToFilter[selection.transferZero](filtered, 0);
 
   return filtered;
 }

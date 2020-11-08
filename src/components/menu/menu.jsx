@@ -34,7 +34,10 @@ class Menu extends React.Component {
     this._handlePriceFromChange = this._handlePriceFromChange.bind(this);
     this._handlePriceToChange = this._handlePriceToChange.bind(this);
 
-    //this._transferRef = React.createRef();
+    this.state = {
+      transferOneDisabled: false,
+      transferZeroDisabled: false,
+    }
 
   }
 
@@ -48,10 +51,16 @@ class Menu extends React.Component {
 
   _handleTransferOneChange() {
     this.props.changeTransferOne();
+    this.setState((state) => ({
+      transferZeroDisabled: !state.transferZeroDisabled
+    }));
   }
 
   _handleTransferZeroChange() {
     this.props.changeTransferZero();
+    this.setState((state) => ({
+      transferOneDisabled: !state.transferOneDisabled
+    }));
   }
 
   _handlePriceFromChange(evt) {
@@ -89,12 +98,16 @@ class Menu extends React.Component {
           <fieldset className="form__set form__set--filter fieldset-reset">
             <legend className="form__heading">Фильтровать</legend>
             <label className="form__label">
-              <input className="visually-hidden form__input-hidden" type="checkbox" name="transferOne" onChange={this._handleTransferOneChange}/>
+              <input className="visually-hidden form__input-hidden" type="checkbox" name="transferOne"
+              onChange={this._handleTransferOneChange}
+              disabled={this.state.transferOneDisabled}/>
               <span className="form__input form__input--box"></span>
               <span className="form__description">- 1 пересадка</span>
             </label>
             <label className="form__label">
-              <input className="visually-hidden form__input-hidden" type="checkbox" name="transferZero" onChange={this._handleTransferZeroChange}/>
+              <input className="visually-hidden form__input-hidden" type="checkbox" name="transferZero"
+              onChange={this._handleTransferZeroChange}
+              disabled={this.state.transferZeroDisabled}/>
               <span className="form__input form__input--box"></span>
               <span className="form__description">- без пересадок</span>
             </label>
@@ -128,6 +141,8 @@ class Menu extends React.Component {
 
 const mapStateToProps = (state) => ({
   flights: state.flights,
+  transferOne: state.transferOne,
+  transferZero: state.transferZero,
 });
 
 const mapDispatchToProps = (dispatch) => ({

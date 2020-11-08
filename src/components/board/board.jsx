@@ -46,6 +46,10 @@ const selectData = (offers, selection) => {
     filtered = filtered.filter((offer) => countTransfers(offer.flight.legs) === 0);
   }
 
+  filtered = filtered.filter((offer) => {
+    return +offer.flight.price.total.amount >= +selection.priceFrom && +offer.flight.price.total.amount <= +selection.priceTo;
+  })
+
   return filtered;
 }
 

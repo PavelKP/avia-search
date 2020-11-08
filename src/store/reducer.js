@@ -37,7 +37,6 @@ const sortingToFilter = {
 }
 
 const selectData = (offers, selection) => {
-  debugger;
   let filtered = offers.slice();
   filtered = sortingToFilter[selection.sorting](filtered);
 
@@ -84,6 +83,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_FLIGHTS:
       return extend(state, {
         flights: action.payload.result.flights,
+        filtered: selectData(action.payload.result.flights, selection)
       });
     case ActionType.SET_SORTING:
       return extend(state, {

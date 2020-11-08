@@ -64,17 +64,12 @@ class Board extends React.PureComponent {
   }
 
   render() {
-    const filteredFlights = selectData(
-      this.props.flights.slice(0, this.state.cards),
-      this.props.selection
-      );
-
     //this.props.setFiltered(filteredFlights);
 
     return (
       <section className="board">
         <ul className="flight list-reset">
-          {filteredFlights.map((flight, i) => <BoardItem key={i} flight={flight} />)}
+          {this.props.filteredFlights.slice(0, this.state.cards).map((flight, i) => <BoardItem key={i} flight={flight} />)}
         </ul>
         <button className="button button--more" type="button" onClick={this._handleLoadMoreClick}>Показать еще</button>
       </section>
@@ -83,15 +78,7 @@ class Board extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  flights: state.flights,
-  selection: {
-    sorting: state.sorting,
-    transferOne: state.transferOne,
-    transferZero: state.transferZero,
-    priceFrom: state.priceFrom,
-    priceTo: state.priceTo,
-    activeCompanies: state.activeCompanies,
-  }
+  filteredFlights: state.filtered,
 });
 
 const mapDispatchToProps = (dispatch) => ({

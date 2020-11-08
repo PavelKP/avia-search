@@ -4,24 +4,19 @@ import {connect} from 'react-redux';
 import {SortingType} from '../../const';
 
 
-
-const array1 = [1, 2, 3, 4];
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
-// 1 + 2 + 3 + 4
-console.log(array1.reduce(reducer));
-// expected output: 10
-
-// 5 + 1 + 2 + 3 + 4
-console.log(array1.reduce(reducer, 5));
-// expected output: 15
-
-
-
 const countDuration = (legs) => {
-  console.log(legs);
   return legs.reduce((acc, current) => acc + current.duration, 0);
 }
+
+const countTransfers = (legs) => {
+  let counter = 0;
+  legs.forEach((leg) => {
+    if (leg.segments.length === 2) {
+      counter++;
+    }
+  })
+  return counter;
+};
 
 const sortingToFilter = {
   [SortingType.TO_HIGH]: (offers) => offers.sort((a, b) => a.flight.price.total.amount - b.flight.price.total.amount),
@@ -29,12 +24,18 @@ const sortingToFilter = {
   [SortingType.TIME]: (offers) => offers.sort((a, b) => {
     return countDuration(a.flight.legs) - countDuration(b.flight.legs)
   }),
+}
 
+const transferToFilter = {
+  [false]: (offers) => offers,
+  [true]: (offers, transfers) => offers.filter((offer) => countTransfers(offer.flight.legs) === transfers),
 }
 
 const selectData = (offers, selection) => {
   let filtered = offers.slice();
   filtered = sortingToFilter[selection.sorting](offers);
+  filtered = transferToFilter[selection.transferOne](offers, 1);
+  filtered = transferToFilter[selection.transferZero](offers, 0);
 
   return filtered;
 }
@@ -52,7 +53,7 @@ class Board extends React.PureComponent {
   }
 
   _handleLoadMoreClick() {
-    this.setState((state) => ({cards: state.cards + 2}));
+    this.setState((state) => ({cards: state.cards + 100}));
   }
 
   render() {

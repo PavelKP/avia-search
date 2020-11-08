@@ -4,9 +4,32 @@ import {connect} from 'react-redux';
 import {SortingType} from '../../const';
 
 
+
+const array1 = [1, 2, 3, 4];
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+// 1 + 2 + 3 + 4
+console.log(array1.reduce(reducer));
+// expected output: 10
+
+// 5 + 1 + 2 + 3 + 4
+console.log(array1.reduce(reducer, 5));
+// expected output: 15
+
+
+
+const countDuration = (legs) => {
+  console.log(legs);
+  return legs.reduce((acc, current) => acc + current.duration, 0);
+}
+
 const sortingToFilter = {
   [SortingType.TO_HIGH]: (offers) => offers.sort((a, b) => a.flight.price.total.amount - b.flight.price.total.amount),
   [SortingType.TO_LOW]: (offers) => offers.sort((a, b) => b.flight.price.total.amount - a.flight.price.total.amount),
+  [SortingType.TIME]: (offers) => offers.sort((a, b) => {
+    return countDuration(a.flight.legs) - countDuration(b.flight.legs)
+  }),
+
 }
 
 const selectData = (offers, selection) => {

@@ -1,6 +1,30 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import CompanyItem from '../compnay-item/company-item';
 
-const Menu = () => {
+const getCompaniesMap = (flights) => {
+  const sortedFlights = flights.sort((a, b) => {
+    return a.flight.price.total.amount - b.flight.price.total.amount;
+  });
+
+  const companiesToPrice = new Map();
+
+  sortedFlights.forEach((flight)=> {
+    if (!companiesToPrice.has(flight.flight.carrier.caption)) {
+
+      const key = flight.flight.carrier.caption;
+      const value = flight.flight.price.total.amount;
+      companiesToPrice.set(key, value);
+    }
+  });
+
+  return [...companiesToPrice];
+}
+
+const Menu = ({flights}) => {
+
+  const companiesCheckboxes = getCompaniesMap(flights);
+
   return (
     <nav className="navigation">
       <form className="form">
@@ -48,6 +72,10 @@ const Menu = () => {
         </fieldset>
         <fieldset className="form__set fieldset-reset">
           <legend className="form__heading">Авиакомпания</legend>
+          {companiesCheckboxes.map(([company, lowestPrice], i) => {
+              return <CompanyItem company={company} price={lowestPrice} key={i} />
+            })}
+
           <label className="form__label">
             <input className="visually-hidden form__input-hidden" type="checkbox" name="company-filter" value="company-name" />
             <span className="form__input form__input--box"></span>
@@ -70,4 +98,8 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+const mapStateToProps = (state) => ({
+  flights: state.flights
+});
+
+export default connect(mapStateToProps)(Menu);

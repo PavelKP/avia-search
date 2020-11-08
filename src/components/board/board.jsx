@@ -64,8 +64,6 @@ class Board extends React.PureComponent {
   }
 
   render() {
-    //this.props.setFiltered(filteredFlights);
-
     return (
       <section className="board">
         <ul className="flight list-reset">

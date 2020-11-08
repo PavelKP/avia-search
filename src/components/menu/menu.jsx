@@ -26,7 +26,7 @@ class Menu extends React.Component {
   constructor(props) {
     super(props)
 
-    this._companiesCheckboxes = getCompaniesMap(this.props.flights);
+    this._companiesCheckboxes = getCompaniesMap(this.props.filtered);
 
     this._handleSortingChange = this._handleSortingChange.bind(this);
     this._handleTransferOneChange = this._handleTransferOneChange.bind(this);
@@ -126,9 +126,7 @@ class Menu extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  flights: state.flights,
-  transferOne: state.transferOne,
-  transferZero: state.transferZero,
+  filtered: state.filtered,
 });
 
 const mapDispatchToProps = (dispatch) => ({

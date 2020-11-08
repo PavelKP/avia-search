@@ -2,6 +2,8 @@ import {extend} from '../utils';
 import {ActionType} from './action';
 import {SortingType} from '../const';
 
+const DEFAULT_CARDS_AMOUNT = 2;
+
 const initialState = {
   flights: [],
   filtered: [],
@@ -11,6 +13,7 @@ const initialState = {
   priceFrom: 0,
   priceTo: 1000000,
   activeCompanies: [],
+  cards: DEFAULT_CARDS_AMOUNT,
 };
 
 
@@ -125,6 +128,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_FILTERED:
       return extend(state, {
         filtered: action.payload,
+      });
+    case ActionType.SET_CARDS_AMOUNT:
+      return extend(state, {
+        cards: state.cards + action.payload,
       });
     default:
       return state;

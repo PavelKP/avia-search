@@ -7,6 +7,7 @@ export const ActionType = {
   SET_PRICE_FROM: `SET_PRICE_FROM`,
   SET_PRICE_TO: `SET_PRICE_TO`,
   SET_FILTERED: `SET_FILTERED`,
+  SET_CARDS_AMOUNT: `SET_CARDS_AMOUNT`,
 };
 
 export const ActionCreator = {
@@ -54,6 +55,12 @@ export const ActionCreator = {
     return {
       type: ActionType.SET_FILTERED,
       payload: filtered,
+    };
+  },
+  setCards(amount) {
+    return {
+      type: ActionType.SET_CARDS_AMOUNT,
+      payload: amount,
     };
   }
 };

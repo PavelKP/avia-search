@@ -38,12 +38,16 @@ class Menu extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({companiesCheckboxes: getCompaniesMap(this.props.filtered)})
+    this.setState({companiesCheckboxes: getCompaniesMap(
+        this.props.filtered.slice(0, this.props.cards)
+      )})
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.filtered !== this.props.filtered) {
-      this.setState({companiesCheckboxes: getCompaniesMap(this.props.filtered)})
+    if (prevProps.filtered !== this.props.filtered || prevProps.cards !== this.props.cards) {
+      this.setState({companiesCheckboxes: getCompaniesMap(
+        this.props.filtered.slice(0, this.props.cards)
+      )})
     }
   }
 
@@ -139,6 +143,7 @@ class Menu extends React.Component {
 
 const mapStateToProps = (state) => ({
   filtered: state.filtered,
+  cards: state.cards,
 });
 
 const mapDispatchToProps = (dispatch) => ({

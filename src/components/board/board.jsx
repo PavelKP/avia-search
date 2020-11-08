@@ -2,7 +2,7 @@ import React from 'react';
 import BoardItem from '../board-item/board-item';
 import {connect} from 'react-redux';
 import {SortingType} from '../../const';
-
+import {ActionCreator} from '../../store/action';
 
 const countDuration = (legs) => {
   return legs.reduce((acc, current) => acc + current.duration, 0);
@@ -25,12 +25,6 @@ const sortingToFilter = {
     return countDuration(a.flight.legs) - countDuration(b.flight.legs)
   }),
 }
-
-/*
-const transferToFilter = {
-  [false]: (offers) => offers,
-  [true]: (offers, transfers) => offers.filter((offer) => countTransfers(offer.flight.legs) === transfers),
-}*/
 
 const selectData = (offers, selection) => {
   let filtered = offers.slice();
@@ -70,21 +64,23 @@ class Board extends React.PureComponent {
   }
 
   render() {
+    const filteredFlights = selectData(
+      this.props.flights.slice(0, this.state.cards),
+      this.props.selection
+      );
+
+    //this.props.setFiltered(filteredFlights);
+
     return (
       <section className="board">
         <ul className="flight list-reset">
-          {selectData(
-            this.props.flights.slice(0, this.state.cards),
-            this.props.selection
-            )
-            .map((flight, i) => <BoardItem key={i} flight={flight} />)}
+          {filteredFlights.map((flight, i) => <BoardItem key={i} flight={flight} />)}
         </ul>
         <button className="button button--more" type="button" onClick={this._handleLoadMoreClick}>Показать еще</button>
       </section>
     );
   }
 }
-
 
 const mapStateToProps = (state) => ({
   flights: state.flights,
@@ -98,5 +94,11 @@ const mapStateToProps = (state) => ({
   }
 });
 
-export default connect(mapStateToProps)(Board);
+const mapDispatchToProps = (dispatch) => ({
+  setFiltered(filtered) {
+    dispatch(ActionCreator.setFiltered(filtered));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Board);
 

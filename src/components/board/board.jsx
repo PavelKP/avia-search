@@ -12,7 +12,6 @@ class Board extends React.PureComponent {
   }
 
   _handleLoadMoreClick() {
-    //this.setState((state) => ({cards: state.cards + 100}));
     this.props.setCards(50);
   }
 

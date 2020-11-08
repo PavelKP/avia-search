@@ -44,9 +44,9 @@ class Menu extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.filtered !== this.props.filtered || prevProps.cards !== this.props.cards) {
+    if (prevProps.filtered !== this.props.filtered) {
       this.setState({companiesCheckboxes: getCompaniesMap(
-        this.props.filtered.slice(0, this.props.cards)
+        this.props.filtered
       )})
     }
   }

@@ -4,6 +4,8 @@ export const ActionType = {
   SET_COMPANY: `SET_COMPANY`,
   CHANGE_TRANSFER_ONE: `CHANGE_TRANSFER_ONE`,
   CHANGE_TRANSFER_ZERO: `CHANGE_TRANSFER_ZERO`,
+  SET_PRICE_FROM: `SET_PRICE_FROM`,
+  SET_PRICE_TO: `SET_PRICE_TO`,
 };
 
 export const ActionCreator = {
@@ -33,6 +35,18 @@ export const ActionCreator = {
   changeTransferZero() {
     return {
       type: ActionType.CHANGE_TRANSFER_ZERO,
+    };
+  },
+  setPriceFrom(price) {
+    return {
+      type: ActionType.SET_PRICE_FROM ,
+      payload: price,
+    };
+  },
+  setPriceTo(price) {
+    return {
+      type: ActionType.SET_PRICE_TO ,
+      payload: price,
     };
   }
 };

@@ -1,15 +1,10 @@
 import {extend} from '../utils';
 import {ActionType} from './action';
-
-const SortingType = {
-  TO_HIGHT: `TO_HIGHT`,
-  TO_LOW: `TO_LOW`,
-  TIME: `TIME`,
-}
+import {SortingType} from '../const';
 
 const initialState = {
   flights: [],
-  sorting: SortingType.TO_HIGHT,
+  sorting: SortingType.TO_HIGH,
   transferOne: false,
   transferZero: false,
   priceFrom: 0,
@@ -49,6 +44,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_TRANSFER_ZERO:
       return extend(state, {
         transferZero: !state.transferZero,
+      });
+    case ActionType.SET_PRICE_FROM:
+      return extend(state, {
+        priceFrom: action.payload,
+      });
+    case ActionType.SET_PRICE_TO:
+      return extend(state, {
+        priceTo: action.payload,
       });
     default:
       return state;

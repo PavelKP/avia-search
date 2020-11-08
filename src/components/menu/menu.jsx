@@ -28,10 +28,11 @@ class Menu extends React.Component {
 
     this._companiesCheckboxes = getCompaniesMap(this.props.flights);
 
-    this._handleFromChange = this._handleFromChange.bind(this);
     this._handleSortingChange = this._handleSortingChange.bind(this);
     this._handleTransferOneChange = this._handleTransferOneChange.bind(this);
     this._handleTransferZeroChange = this._handleTransferZeroChange.bind(this);
+    this._handlePriceFromChange = this._handlePriceFromChange.bind(this);
+    this._handlePriceToChange = this._handlePriceToChange.bind(this);
 
     //this._transferRef = React.createRef();
 
@@ -39,15 +40,9 @@ class Menu extends React.Component {
 
   _handleFromChange(evt) {
     evt.preventDefault();
-    console.log(evt);
-    //const formData = new FormData(this._formRef.current)
-    //console.log(...formData);
-    //console.log(formData.get(`transferOne`), formData.get(`transferZero`))
-    console.log(evt.target.value);
   }
 
   _handleSortingChange(evt) {
-    //console.log(evt.target.value)
     this.props.setSorting(evt.target.value);
   }
 
@@ -59,6 +54,16 @@ class Menu extends React.Component {
     this.props.changeTransferZero();
   }
 
+  _handlePriceFromChange(evt) {
+    evt.preventDefault();
+    this.props.setPriceFrom(evt.target.value);
+  }
+
+  _handlePriceToChange(evt) {
+    evt.preventDefault();
+    this.props.setPriceTo(evt.target.value);
+  }
+
   render() {
     return (
       <nav className="navigation">
@@ -66,7 +71,7 @@ class Menu extends React.Component {
           <fieldset className="form__set fieldset-reset" onChange={this._handleSortingChange}>
             <legend className="form__heading">Сортировать</legend>
             <label className="form__label">
-              <input className="visually-hidden form__input-hidden" type="radio" name="sorting" value="TO_HIGHT" defaultChecked/>
+              <input className="visually-hidden form__input-hidden" type="radio" name="sorting" value="TO_HIGH" defaultChecked/>
               <span className="form__input form__input--radio"></span>
               <span className="form__description">- по возрастанию цены</span>
             </label>
@@ -98,11 +103,15 @@ class Menu extends React.Component {
             <legend className="form__heading">Цена</legend>
             <div className="form__description-input-wrapper">
               <span className="form__description form__description--price">От</span>
-              <input className="form__input form__input--text" name="from" type="number" placeholder="0" inputMode="numeric" defaultValue={this.props.priceFrom || ``} />
+              <input className="form__input form__input--text" name="from" type="number" placeholder="0" inputMode="numeric"
+                onChange={this._handlePriceFromChange}
+                defaultValue={''}/>
             </div>
             <div className="form__description-input-wrapper">
               <span className="form__description form__description--price">До</span>
-              <input className="form__input form__input--text" name="to" type="number" placeholder="10000" inputMode="numeric" defaultValue={this.props.priceTo || ``} />
+              <input className="form__input form__input--text" name="to" type="number" placeholder="10000" inputMode="numeric"
+                onChange={this._handlePriceToChange}
+                defaultValue={''} />
             </div>
           </fieldset>
           <fieldset className="form__set fieldset-reset">
@@ -117,14 +126,8 @@ class Menu extends React.Component {
   }
 }
 
-
 const mapStateToProps = (state) => ({
   flights: state.flights,
-  sorting: state.sorting,
-  transferOne: state.transferOne,
-  transferZero: state.transferZero,
-  priceFrom: state.priceFrom,
-  priceTo: state.priceTo,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -136,6 +139,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   changeTransferZero() {
     dispatch(ActionCreator.changeTransferZero());
+  },
+  setPriceFrom(price) {
+    dispatch(ActionCreator.setPriceFrom(price));
+  },
+  setPriceTo(price) {
+    dispatch(ActionCreator.setPriceTo(price));
   }
 });
 

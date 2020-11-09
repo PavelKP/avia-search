@@ -132,7 +132,8 @@ class Menu extends React.Component {
           <fieldset className="form__set fieldset-reset">
             <legend className="form__heading">Авиакомпания</legend>
             {this.state.companiesCheckboxes.map(([company, lowestPrice], i) => {
-              return <CompanyItem company={company} price={lowestPrice} key={i}/>
+              return <CompanyItem company={company} price={lowestPrice} key={i}
+              checked={Boolean(this.props.activeCompanies.indexOf(company) + 1)}/>
             })}
           </fieldset>
         </form>
@@ -144,6 +145,7 @@ class Menu extends React.Component {
 const mapStateToProps = (state) => ({
   filtered: state.filtered,
   cards: state.cards,
+  activeCompanies: state.activeCompanies
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -9,13 +9,9 @@ const trimText = (text) => {
     return text;
 }
 
-class CompanyItem extends React.PureComponent {
+class CompanyItem extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      checked: false,
-    }
   }
 
   render() {
@@ -23,9 +19,8 @@ class CompanyItem extends React.PureComponent {
       <label className="form__label">
         <input className="visually-hidden form__input-hidden" type="checkbox"
           name={this.props.company}
-          checked={this.state.checked}
+          checked={this.props.checked}
           onChange={(evt) => {
-            this.setState((state) => ({checked: !state.checked}))
             this.props.setCompany(evt.target.name)
           }} />
         <span className="form__input form__input--box"></span>

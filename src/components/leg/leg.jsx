@@ -41,7 +41,7 @@ const Leg = ({leg, i: key}) => {
           <span>{formatDate(new Date(to.arrivalDate), `HH:mm`)} </span>
         </p>
       </div>
-      <div className="leg__line leg__line--transfer">
+      <div className={`leg__line leg__line--transfer ${transferCount ? `` : `leg__line--empty`}`}>
         {transferCount ? <p className="leg__counter">{transferCount} пересадка</p> : ''}
       </div>
       <p className="leg__line leg__line--airline">

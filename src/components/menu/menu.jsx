@@ -120,12 +120,16 @@ class Menu extends React.Component {
               <span className="form__description form__description--price">От</span>
               <input className="form__input form__input--text" name="from" type="number" placeholder="0" inputMode="numeric"
                 onChange={this._handlePriceFromChange}
+                onFocus={(evt) => {evt.target.placeholder=``}}
+                onBlur={(evt) => {evt.target.placeholder=`0`}}
                 defaultValue={''}/>
             </div>
             <div className="form__description-input-wrapper">
               <span className="form__description form__description--price">До</span>
               <input className="form__input form__input--text" name="to" type="number" placeholder="10000" inputMode="numeric"
                 onChange={this._handlePriceToChange}
+                onFocus={(evt) => {evt.target.placeholder=``}}
+                onBlur={(evt) => {evt.target.placeholder=`10000`}}
                 defaultValue={''} />
             </div>
           </fieldset>

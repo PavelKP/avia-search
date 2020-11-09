@@ -3,3 +3,5 @@ export const SortingType = {
   TO_LOW: `TO_LOW`,
   TIME: `TIME`,
 }
+
+export const CARDS_STEP = 50;

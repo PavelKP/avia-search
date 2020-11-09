@@ -2,6 +2,7 @@ import React from 'react';
 import BoardItem from '../board-item/board-item';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
+import {CARDS_STEP} from '../../const';
 
 
 class Board extends React.PureComponent {
@@ -12,7 +13,7 @@ class Board extends React.PureComponent {
   }
 
   _handleLoadMoreClick() {
-    this.props.setCards(50);
+    this.props.setCards(CARDS_STEP);
   }
 
   render() {
